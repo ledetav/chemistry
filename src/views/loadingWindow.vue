@@ -3,7 +3,7 @@
     <div class="loadingWindow">
       <div class="logo">
         <div class="logoChem">
-          <img src="@\assets\logo.svg">
+          <img src="@\assets\atom-svgrepo-com.svg">
         </div>
         <div class="logoName">
           <h2 class="appName">ChemistryWebApp 2.0</h2>
@@ -12,34 +12,18 @@
       </div>
       <div class="bgBlock">
         <div class="colorWavy"></div>
-          <button class="logInBtn"><router-link to="/app">Начать!</router-link></button>
+          <router-link to="app">
+            <button class="logInBtn">
+              Начать!
+              <i class="fa-regular fa-chevron-right fa-lg" style="margin-left: 15px;"></i>
+            </button>
+          </router-link>
       </div>
     </div>
   </div>
-  <router-view/>
 </template>
-
-<style lang="scss">
-/* PRIMARY COLORS */
-
-$bgColor: #e0e5e6;
-$panelColor: #3d9690;
-$contrastColorDark: #023026;
-$contrastColorLight: #6e9a44;
-$bgColorWavy: #bad072;
-$bgColorSecond: #d5e2ed;
-$bgWindow: #fbfcfd;
-
-* {
-  padding: 0;
-  margin: 0;
-}
-
-body {
-  background-color: $bgColor;
-}
-
-@keyframes effect {
+<style lang="scss" scoped>
+  @keyframes effect {
   0% {opacity: 0; }
   80% {opacity: 0.85;}
   100% {opacity: 1;}
@@ -61,8 +45,8 @@ body {
 .loadingWindow {
   position: absolute;
 
-  background-color: $bgWindow;
-  box-shadow: 5px 5px 35px #bebebe, -5px -5px 35px #ffffff;
+  background-color: var(--background-window-color);
+  box-shadow: 5px 5px 35px var(--shadow-color-first), -5px -5px 35px var(--shadow-color-second);
 
   width: 100%;
   height: 100%;
@@ -91,7 +75,7 @@ body {
   transform: translate(-50%, -50%);
   transition: transform 300ms, box-shadow 300ms;
 
-  box-shadow: 5px 10px 10px rgba($bgWindow, 0.2);
+  box-shadow: 5px 10px 10px rgba(var(--background-window-color), 0.2);
   
   &::before, &::after {
     content: '';
@@ -112,7 +96,7 @@ body {
     left: 40%;
     bottom: -50%;
 
-    background-color: rgba($contrastColorLight, 0.15);
+    background-color: rgba(var(--contrast-color-light), 0.15);
 
     animation: wawes 10s infinite linear;
   }
@@ -121,7 +105,7 @@ body {
     left: 35%;
     bottom: -45%;
 
-    background-color: rgba($bgColorSecond, 0.2);
+    background-color: rgba(var(--background-color-second), 0.2);
 
     animation: wawes 12s infinite;
   }
@@ -135,7 +119,7 @@ body {
 .bgBlock {
   overflow: hidden;
 
-  background: linear-gradient(-120deg, $bgColorWavy 0%, $contrastColorLight 50%, $contrastColorDark 100%);
+  background: linear-gradient(-120deg, var(--extra-light) 0%, var(--contrast-color-light) 50%, var(--contrast-color-dark) 100%);
 
   top: 40%;
 
@@ -170,12 +154,12 @@ body {
   font-family: Oswald;
   font-size: 20px;
 
-  background-color: $contrastColorDark;
+  background-color: var(--contrast-color-dark);
   cursor: pointer;
   display: inline-block;
 
   transition: all 0.3s ease;
-  color: $bgWindow;
+  color: var(--btn-color);
 
   animation: effectBtn 0.5s ease-in-out;
   animation-delay: 3.5s;
@@ -192,7 +176,7 @@ body {
   to {opacity: 1; top: 50%;}
 }
 .logInBtn:hover {
-  background: $contrastColorDark;
+  background: var(--contrast-color-dark);
   color: #fff;
 }
 .logInBtn:before {
@@ -260,7 +244,7 @@ h2 {
   font-weight: 800;
   font-size: 35px;
 
-  color: $contrastColorLight;
+  color: var(--contrast-color-light);
 
   animation: effect 0.5s ease-in-out;
   animation-delay: 1s;
@@ -268,8 +252,8 @@ h2 {
   animation-fill-mode: forwards;
 }
 .appName {
-  background: linear-gradient(-80deg, $bgColorWavy 0%, $contrastColorLight 50%, $contrastColorDark 100%);
-  -webkit-background-clip: text;
+  background: linear-gradient(-80deg, var(--extra-light-name) 0%, var(--contrast-color-light-name) 50%, var(--contrast-color-dark-name) 100%);
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 h4 {
