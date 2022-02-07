@@ -6,7 +6,7 @@
           <img src="@\assets\atom-svgrepo-com.svg">
         </div>
         <div class="logoName">
-          <h2 class="appName">ChemistryWebApp 2.0</h2>
+          <h2 class="appName">ChemistryWebApp 2.0</h2><h2 style="color: red; font-size: 16px;">demo</h2>
           <h4>Карманный справочник</h4>
         </div>
       </div>
