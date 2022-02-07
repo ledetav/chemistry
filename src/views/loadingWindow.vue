@@ -151,10 +151,9 @@
   border-radius: 5px;
 
   font-weight: 600;
-  font-family: Oswald;
   font-size: 20px;
 
-  background-color: var(--contrast-color-dark);
+  background-color: var(--btn-color-bg);
   cursor: pointer;
   display: inline-block;
 
@@ -240,8 +239,7 @@
 }
 
 h2 {
-  font-family: Oswald, sans-serif;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 35px;
 
   color: var(--contrast-color-light);
@@ -252,7 +250,7 @@ h2 {
   animation-fill-mode: forwards;
 }
 .appName {
-  background: linear-gradient(-80deg, var(--extra-light-name) 0%, var(--contrast-color-light-name) 50%, var(--contrast-color-dark-name) 100%);
+  background: var(--logo-color);
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }

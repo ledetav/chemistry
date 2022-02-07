@@ -35,6 +35,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap');
+
 :root {
   --background-color: #e0e5e6;
   --background-color-second: #f0f2f3;
@@ -59,6 +61,8 @@ export default {
   --select-light: rgba(0, 0, 0, 0.5);
   --select-dark: #000;
   --select-darkest:rgba(0, 0, 0, 0.15);
+  --btn-color-bg: #023026; 
+  --logo-color: linear-gradient(-80deg, var(--extra-light-name) 0%, var(--contrast-color-light-name) 50%, var(--contrast-color-dark-name) 100%);
 }
 :root.dark-theme {
   --contrast-color-dark: #101827;
@@ -83,13 +87,16 @@ export default {
   --select-lightest: rgba(197, 202, 233, 0.26);
   --select-light: rgba(197, 202, 233, 0.5);
   --select-dark: #c5cae9;
-  --select-darkest:rgba(197, 202, 233, 0.15);
+  --select-darkest:rgba(197, 202, 233, 0.15); 
+  --btn-color-bg: #4e5b72;
+  --logo-color: #c5cae9;
 }
 
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
 }
 
 body {

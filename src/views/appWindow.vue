@@ -9,48 +9,76 @@
           ></i>
         </button>
         <div class="window">
-          <div id="left">
-            <div id="select">
-              <v-select
-                :options="compounds"
-                label="title"
-                :reduce="compound => compound.id"
-                v-model="selected"
-                :searchable="false"
-                style="width: 90%;"
-              >
-              </v-select>
+            <div id="left" v-show="visibleSelect == true">
+              <div id="select">
+                <v-select
+                  :options="compounds"
+                  label="title"
+                  :reduce="(compound) => compound.id"
+                  v-model="selected"
+                  :searchable="false"
+                  style="width: 90%"
+                >
+                </v-select>
+              </div>
             </div>
-            <button class="show showSelect" @click.prevent="showSelect">
-              <i class="fa-solid fa-angles-left" v-if="visibleInfo == true"></i>
-              <i class="fa-solid fa-angles-right" v-if="visibleInfo == false"></i>
-            </button>
+            <button
+                class="show showSelect"
+                @click.prevent="showSelect"
+                v-bind:class="{ isShowSelect: visibleSelect == false }"
+              >
+                <i
+                  class="fa-solid fa-angles-left"
+                  v-if="visibleSelect == true"
+                ></i>
+                <i
+                  class="fa-solid fa-angles-right"
+                  v-if="visibleSelect == false"
+                ></i>
+              </button>
+          <div class="notification" v-if="selected == null && visibleSelect == true">
+            <img
+              src="@/assets/arrow.png"
+              class="arrow"
+              width="100"
+              height="100"
+            />
+            <h3>Выберите соединение из списка слева.</h3>
+            <img src="@/assets/pa.png" class="pap" width="200" height="200" />
           </div>
-          <div class="compoundWindow">
-            <h3 v-if="selected == null">
-              Выберите соединение из списка слева.
-            </h3>
-            <div v-else>
+          <div class="notification" v-else-if="visibleSelect == false && selected == null">
+            <h3>Разверните список слева.</h3>
+            <img src="@/assets/pa.png" class="pap" width="200" height="200" />
+          </div>
+          <div class="compoundWindow" v-else>
+            <div>
               <div class="model"></div>
-              <div id="right">
-                <button class="show showInfo" @click.prevent="showInfo" v-if="selected != null">
-                  <i class="fa-solid fa-angles-left" v-if="visibleInfo == false"></i>
-                  <i class="fa-solid fa-angles-right" v-if="visibleInfo == true"></i>
+              <button
+                  class="show showInfo"
+                  @click.prevent="showInfo"
+                  v-if="selected != null"
+                  v-bind:class="{ isShowInfo: visibleInfo == false }"
+                >
+                  <i
+                    class="fa-solid fa-angles-left"
+                    v-if="visibleInfo == false"
+                  ></i>
+                  <i
+                    class="fa-solid fa-angles-right"
+                    v-if="visibleInfo == true"
+                  ></i>
                 </button>
+              <div id="right" v-if="visibleInfo == true">
                 <div id="listInfo" v-if="selected != null">
                   <div
                     class="compList"
                     v-for="(compound, index) in compounds"
                     :key="index"
                   >
-                    <div
-                      class="compound"
-                      v-if="compound.id == selected"
-                    >
+                    <div class="compound" v-if="compound.id == selected">
                       <h5>{{ compound.title }}</h5>
                       <h6 class="description">{{ compound.body }}</h6>
                     </div>
-                    
                   </div>
                 </div>
               </div>
@@ -72,21 +100,41 @@ export default {
   data() {
     return {
       compounds: [
-        { id: 1, title: "Compound 1", body: "description", info: {
-          name: "",
-          formula: "",
-
-        }},
+        {
+          id: 1,
+          title: "Compound 1",
+          body: "description",
+          info: {
+            name: "",
+            formula: "",
+          },
+        },
         { id: 2, title: "Compound 2", body: "description" },
         { id: 3, title: "Compound 3", body: "description" },
         { id: 4, title: "Compound 4", body: "description" },
         { id: 5, title: "Compound 5", body: "description" },
         { id: 6, title: "Compound 6", body: "description" },
       ],
-      visibleSearch: true,
+      visibleSelect: true,
       visibleInfo: true,
       selected: null,
     };
+  },
+  methods: {
+    showSelect() {
+      if (this.visibleSelect == true) {
+        this.visibleSelect = false;
+      } else {
+        this.visibleSelect = true;
+      }
+    },
+    showInfo() {
+      if (this.visibleInfo == true) {
+        this.visibleInfo = false;
+      } else {
+        this.visibleInfo = true;
+      }
+    },
   },
 };
 </script>
@@ -236,10 +284,16 @@ a {
   margin-top: 2%;
   width: 25%;
   height: 100%;
+
+  z-index: 1;
+
+  animation: effect 0.3s ease-in-out;
+  animation-delay: 0.3s;
+  opacity: 0;
+  animation-fill-mode: forwards;
 }
 
 #select {
-
   background-color: var(--background-color-second);
 
   display: flex;
@@ -252,7 +306,7 @@ a {
 
   border-radius: 10px;
   box-shadow: 6px 6px 22px var(--shadow-color-first),
-             -6px -6px 22px var(--shadow-color-second);
+    -6px -6px 22px var(--shadow-color-second);
 }
 
 .searchInput {
@@ -329,11 +383,16 @@ a {
   position: absolute;
   display: flex;
 
-  margin-top: 2%;
-  margin-left: 49%;
+  margin-top: 20px;
+  margin-left: 850px;
 
-  min-width: 25%;
-  height: 90%;
+  width: 285px;
+  height: 525px;
+
+  animation: effect 0.3s ease-in-out;
+  animation-delay: 0.3s;
+  opacity: 0;
+  animation-fill-mode: forwards;
 }
 
 #listInfo {
@@ -342,7 +401,7 @@ a {
   border-radius: 10px;
   width: 100%;
   box-shadow: -6px 6px 22px var(--shadow-color-first),
-             6px -6px 22px var(--shadow-color-second);
+    6px -6px 22px var(--shadow-color-second);
 }
 .show {
   height: 20px;
@@ -351,16 +410,96 @@ a {
   border-radius: 2px;
   cursor: pointer;
   background-color: var(--extra-light);
+
 }
 .showInfo {
-  margin-top: 20px;
-  margin-right: 5px;
-  position: relative;
+  margin-top: 35px;
+  margin-left: 815px;
+  position: absolute;
+  z-index: 1;
+  animation: effect 0.3s ease-in-out;
+  animation-delay: 0.5s;
+  opacity: 0;
+  animation-fill-mode: forwards;
 }
 .showSelect {
-  margin-top: 10px;
+  margin-top: 35px;
   margin-left: 5px;
   position: relative;
+  
+  z-index: 1;
+
+  animation: effect 0.3s ease-in-out;
+  animation-delay: 0.5s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.compoundWindow {
+  display: flex;
+  position: fixed;
+}
+
+.notification {
+  margin-top: 50px;
+  margin-left: 140px;
+  width: 700px;
+  height: 500px;
+
+  position: fixed;
+
+  animation: effect 0.2s ease-in-out;
+  animation-delay: 0.3s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+  //display: flex;
+  h3 {
+    text-align: center;
+    margin-top: 200px;
+    margin-left: 160px;
+    color: var(--select-text-color);
+    font-weight: 400;
+    font-size: 20px;
+  }
+}
+
+.arrow {
+  position: absolute;
+  filter: opacity(30%);
+  top: 13%;
+  left: 22%;
+  transform: rotate(-10deg);
+
+  animation: effect 0.2s ease-in-out;
+  animation-delay: 0.3s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.pap {
+  position: absolute;
+  top: 60%;
+  left: 43%;
+  filter: opacity(40%);
+
+  animation: effect 0.2s ease-in-out;
+  animation-delay: 0.5s;
+  opacity: 0;
+  animation-fill-mode: forwards;
+}
+
+.isShowSelect {
+  margin-left: 15px;
+}
+
+.isShowInfo {
+  margin-left: 1115px;
+}
+
+@keyframes effect {
+  0% {opacity: 0; }
+  80% {opacity: 0.85;}
+  100% {opacity: 1;}
 }
 
 @media screen and (max-width: 479px) {
