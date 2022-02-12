@@ -9,34 +9,34 @@
           ></i>
         </button>
         <div class="window">
-            <div id="left" v-show="visibleSelect == true">
-              <div id="select">
-                <v-select
-                  :options="compounds"
-                  label="title"
-                  :reduce="(compound) => compound.id"
-                  v-model="selected"
-                  :searchable="false"
-                  style="width: 90%"
-                >
-                </v-select>
-              </div>
-            </div>
-            <button
-                class="show showSelect"
-                @click.prevent="showSelect"
-                v-bind:class="{ isShowSelect: visibleSelect == false }"
+          <div id="left" v-show="visibleSelect == true">
+            <div id="select">
+              <v-select
+                :options="compounds"
+                label="title"
+                :reduce="(compound) => compound.id"
+                v-model="selected"
+                :searchable="false"
+                style="width: 90%"
               >
-                <i
-                  class="fa-solid fa-angles-left"
-                  v-if="visibleSelect == true"
-                ></i>
-                <i
-                  class="fa-solid fa-angles-right"
-                  v-if="visibleSelect == false"
-                ></i>
-              </button>
-          <div class="notification" v-if="selected == null && visibleSelect == true">
+              </v-select>
+            </div>
+          </div>
+          <button
+            class="show showSelect"
+            @click.prevent="showSelect"
+            v-bind:class="{ isShowSelect: visibleSelect == false }"
+          >
+            <i class="fa-solid fa-angles-left" v-if="visibleSelect == true"></i>
+            <i
+              class="fa-solid fa-angles-right"
+              v-if="visibleSelect == false"
+            ></i>
+          </button>
+          <div
+            class="notification"
+            v-if="selected == null && visibleSelect == true"
+          >
             <img
               src="@/assets/arrow.png"
               class="arrow"
@@ -46,7 +46,10 @@
             <h3>Выберите соединение из списка слева.</h3>
             <img src="@/assets/pa.png" class="pap" width="200" height="200" />
           </div>
-          <div class="notification" v-else-if="visibleSelect == false && selected == null">
+          <div
+            class="notification"
+            v-else-if="visibleSelect == false && selected == null"
+          >
             <h3>Разверните список слева.</h3>
             <img src="@/assets/pa.png" class="pap" width="200" height="200" />
           </div>
@@ -54,20 +57,20 @@
             <div>
               <div class="model"></div>
               <button
-                  class="show showInfo"
-                  @click.prevent="showInfo"
-                  v-if="selected != null"
-                  v-bind:class="{ isShowInfo: visibleInfo == false }"
-                >
-                  <i
-                    class="fa-solid fa-angles-left"
-                    v-if="visibleInfo == false"
-                  ></i>
-                  <i
-                    class="fa-solid fa-angles-right"
-                    v-if="visibleInfo == true"
-                  ></i>
-                </button>
+                class="show showInfo"
+                @click.prevent="showInfo"
+                v-if="selected != null"
+                v-bind:class="{ isShowInfo: visibleInfo == false }"
+              >
+                <i
+                  class="fa-solid fa-angles-left"
+                  v-if="visibleInfo == false"
+                ></i>
+                <i
+                  class="fa-solid fa-angles-right"
+                  v-if="visibleInfo == true"
+                ></i>
+              </button>
               <div id="right" v-if="visibleInfo == true">
                 <div id="listInfo" v-if="selected != null">
                   <div
@@ -93,6 +96,21 @@
       </button>
     </router-link>
     <router-view />
+    <div class="warningBlock">
+      <div class="warning">
+        <h4>
+          Приложение пока не расситано на устройство с экраном такого размера.
+          Мы работаем над этим!
+        </h4>
+        <br />
+        <h5>
+          <i
+            >Пожалуйста, поверните устройство в горизонтальное положение или
+            откройте с утройства с большим размером экрана (планшет, ПК).</i
+          >
+        </h5>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -410,7 +428,6 @@ a {
   border-radius: 2px;
   cursor: pointer;
   background-color: var(--extra-light);
-
 }
 .showInfo {
   margin-top: 35px;
@@ -426,7 +443,7 @@ a {
   margin-top: 35px;
   margin-left: 5px;
   position: relative;
-  
+
   z-index: 1;
 
   animation: effect 0.3s ease-in-out;
@@ -495,32 +512,54 @@ a {
 .isShowInfo {
   margin-left: 1115px;
 }
+.warningBlock {
+  background: rgba(21, 21, 21, 0.748);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+.warning {
+  top: 40%;
+  z-index: 1;
+  position: absolute;
+  margin: auto;
+  min-width: 99%;
+  height: 30%;
+  background-color: var(--background-window-color);
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
 
-@keyframes effect {
-  0% {opacity: 0; }
-  80% {opacity: 0.85;}
-  100% {opacity: 1;}
+  h4 {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: var(--contrast-color-dark);
+  }
+
+  h5 {
+    color: var(--select-text-color);
+    font-size: 0.6rem;
+  }
 }
 
-@media screen and (max-width: 479px) {
-  .btnBack {
-    margin-top: 10px;
-    margin-left: 10px;
-
-    height: 15px;
-    width: 15px;
+@keyframes effect {
+  0% {
+    opacity: 0;
+  }
+  80% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .btnBack {
-    margin-top: 40px;
-    margin-left: 0px;
-
-    height: 22px;
-    width: 22px;
-
-    font-size: 10px;
+  .warningBlock {
+    opacity: 1;
   }
 }
 </style>
