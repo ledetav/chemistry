@@ -5,13 +5,13 @@ import appWindow from '@/views/appWindow.vue'
 const routes = [
   {
     path: '/',
-    name: 'Cemistry WebApp 2.0',
+    name: 'loading',
     component: loadingWindow
   },
 
   {
     path: '/app',
-    name: 'Window',
+    name: 'main',
     component: appWindow
   }
 ]
