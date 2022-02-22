@@ -1,302 +1,255 @@
 <template>
-    <div>
-      <div class="appWindow">
-           <div class="frame">
-             <button class="menu"></button>
-             <button class="theme">☼</button>
-             <div class="window">
-               <div id="left">
-                 <div id ="search">
-                   <input class="searchInput" placeholder="Поиск по соединениям">
-                 </div>
-                 <div id="list">
-                   <div class="compList" v-for="compound in compounds" :key="compound.id">
-                     <div class="compound">
-                       <h5>{{ compound.title }}</h5>
-                       <h6>{{ compound.body }}</h6>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-             </div>
+  <div>
+    <div class="appWindow">
+      <div class="frame">
+        <button class="menu">
+          <i
+            class="fa-regular fa-bars fa-xl"
+            style="color: var(--icon-color-primary); position: absolute"
+          ></i>
+        </button>
+        <div class="window">
+          <div id="left" v-show="visibleSelect == true">
+            <div id="select">
+              <v-select
+                :options="compounds"
+                label="title"
+                :reduce="(compound) => compound.id"
+                v-model="selected"
+                :searchable="false"
+                style="width: 90%"
+              >
+              </v-select>
+            </div>
           </div>
+          <button
+            class="show showSelect"
+            @click.prevent="showSelect"
+            v-bind:class="{ isShowSelect: visibleSelect == false }"
+          >
+            <i class="fa-solid fa-angles-left" v-if="visibleSelect == true"></i>
+            <i
+              class="fa-solid fa-angles-right"
+              v-if="visibleSelect == false"
+            ></i>
+          </button>
+          <div
+            class="notification"
+            v-if="selected == null && visibleSelect == true"
+          >
+            <img
+              src="@/assets/arrow.png"
+              class="arrow"
+              width="100"
+              height="100"
+            />
+            <h3>Выберите соединение из списка слева.</h3>
+            <img src="@/assets/pa.png" class="pap" width="200" height="200" />
+          </div>
+          <div
+            class="notification"
+            v-else-if="visibleSelect == false && selected == null"
+          >
+            <h3>Разверните список слева.</h3>
+            <img src="@/assets/pa.png" class="pap" width="200" height="200" />
+          </div>
+          <div class="compoundWindow" v-else>
+            <div>
+              <div>
+                <div
+                  class="compList"
+                  v-for="(compound, index) in compounds"
+                  :key="index"
+                >
+                  <div class="model" v-if="compound.id == selected">
+                    <v-model :gltf-file="compound.gltfFile" />
+                  </div>
+                </div>
+              </div>
+              <button
+                class="show showInfo"
+                @click.prevent="showInfo"
+                v-if="selected != null"
+                v-bind:class="{ isShowInfo: visibleInfo == false }"
+              >
+                <i
+                  class="fa-solid fa-angles-left"
+                  v-if="visibleInfo == false"
+                ></i>
+                <i
+                  class="fa-solid fa-angles-right"
+                  v-if="visibleInfo == true"
+                ></i>
+              </button>
+              <div id="right" v-if="visibleInfo == true">
+                <div id="listInfo" v-if="selected != null">
+                  <div
+                    class="compList"
+                    v-for="(compound, index) in compounds"
+                    :key="index"
+                  >
+                    <div v-if="compound.id == selected">
+                      <div class="compound">
+                        <h6 class="description">Название соединения:</h6>
+                        <h5>{{ compound.info.name }}</h5>
+                      </div>
+                      <h3
+                        style="
+                          margin: 15px;
+                          font-size: 14px;
+                          color: var(--contrast-color-dark);
+                        "
+                      >
+                        Физические свойства:
+                      </h3>
+                      <div>
+                        <div class="compound">
+                          <h6 class="description">Агрегатное состояние:</h6>
+                          <h5>{{ compound.info.agregate }}</h5>
+                        </div>
+                        <div class="compound">
+                          <h6 class="description">Цвет:</h6>
+                          <h5>{{ compound.info.color }}</h5>
+                        </div>
+                        <div class="compound">
+                          <h6 class="description">Запах:</h6>
+                          <h5>{{ compound.info.smell }}</h5>
+                        </div>
+                        <div class="compound">
+                          <h6 class="description">Растворимость в воде:</h6>
+                          <h5>{{ compound.info.solubility }}</h5>
+                        </div>
+                      </div>
+                      <h3
+                        style="
+                          margin: 15px;
+                          font-size: 14px;
+                          color: var(--contrast-color-dark);
+                        "
+                      >
+                        Химические свойства:
+                      </h3>
+                      <div>
+                        <div class="compound">
+                          <h6 class="description">Агрегатное состояние:</h6>
+                          <h5>{{ compound.info.agregate }}</h5>
+                        </div>
+                        <div class="compound">
+                          <h6 class="description">Цвет:</h6>
+                          <h5>{{ compound.info.color }}</h5>
+                        </div>
+                        <div class="compound">
+                          <h6 class="description">Запах:</h6>
+                          <h5>{{ compound.info.smell }}</h5>
+                        </div>
+                        <div class="compound">
+                          <h6 class="description">Растворимость в воде:</h6>
+                          <h5>{{ compound.info.solubility }}</h5>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <button class="btnBack"><router-link to="/">←</router-link></button>
-      <router-view/>
     </div>
+    <router-link to="/">
+      <button class="btnBack">
+        <i class="fa-duotone fa-arrow-left-from-line fa-lg"></i>
+      </button>
+    </router-link>
+    <router-view />
+  </div>
 </template>
 <script>
 export default {
-    data () {
-      return {
-        compounds: [
-          {id: 1, title: "Compound 1", body: "description"},
-          {id: 2, title: "Compound 2", body: "description"},
-          {id: 3, title: "Compound 3", body: "description"},
-        ]
+  data() {
+    return {
+      compounds: [
+        {
+          id: 1,
+          title: "Метан",
+          gltfFile: "models/untitled.gltf",
+          info: {
+            name: "Метан",
+            agregate: "Газ",
+            color: "Бесцветное вещество",
+            smell: "Без запаха",
+            solubility: "Малорастворим",
+          },
+        },
+        {
+          id: 2,
+          title: "Метанол",
+          gltfFile: "models/untitled.gltf",
+          info: {
+            name: "Метанол",
+            agregate: "Жидкость",
+            color: "Бесцетное вещество",
+            smell: "Похож на запах этилового спирта, но более слабый",
+            solubility: "Хорошо растворим",
+          },
+        },
+        {
+          id: 3,
+          title: "Уксусная кислота",
+          gltfFile: "models/untitled.gltf",
+          info: {
+            name: "Уксусная кислота",
+            agregate: "Жидкость",
+            color: "Бесцветное вещество",
+            smell: "Резкий",
+            solubility: "Неограниченно растворима в воде",
+          },
+        },
+        {
+          id: 4,
+          title: "Диметиловый эфир",
+          gltfFile: "models/untitled.gltf",
+          info: {
+            name: "Диметиловый эфир",
+            agregate: "Газ",
+            color: "Бесцветное вещество",
+            smell: "Эфирный запах, напоминающий хлороформ",
+            solubility: "Хорошо растворим",
+          },
+        },
+        {
+          id: 5,
+          title: "Этанол",
+          gltfFile: "models/untitled.gltf",
+          info: {
+            name: "Этанол",
+            agregate: "Жидкость",
+            color: "Бесцветное вещество",
+            smell: "Характерный спиртовой запах",
+            solubility: "Хорошо растворим",
+          },
+        },
+      ],
+      visibleSelect: true,
+      visibleInfo: true,
+      selected: null,
+    };
+  },
+  methods: {
+    showSelect() {
+      if (this.visibleSelect == true) {
+        this.visibleSelect = false;
+      } else {
+        this.visibleSelect = true;
       }
-    }
-}
+    },
+    showInfo() {
+      if (this.visibleInfo == true) {
+        this.visibleInfo = false;
+      } else {
+        this.visibleInfo = true;
+      }
+    },
+  },
+};
 </script>
-
-<style lang="scss">
-    $bgColor: #e0e5e6;
-    $panelColor: #3d9690;
-    $contrastColorDark: #023026;
-    $contrastColorLight: #6e9a44;
-    $bgColorWavy: #bad072;
-    $bgColorSecond: #d5e2ed;
-    $bgWindow: #fbfcfd;
-
-    * {
-      box-sizing: border-box;
-    }
-
-    @keyframes effect {
-        0% {opacity: 0; }
-        80% {opacity: 0.85;}
-        100% {opacity: 1;}
-    }
-
-    /* WINDOW APP */
-    .appWindow {
-        position: relative;
-
-        height: 90%;
-        width: 90%;
-        top: 50%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%);
-
-        border-radius: 10px;
-        overflow: hidden;
-        position: absolute;
-
-        opacity: 0;
-        animation-delay: 0.5s;
-        animation: effect 0.55s ease-in-out;
-        animation-fill-mode: forwards;
-
-        box-shadow: 10px 10px 35px #bebebe, -10px -10px 35px #ffffff;
-    }
-
-    /* FRAME FOR MAIN BUTTONS & MENU */
-    .frame {
-        position: absolute;
-        overflow: hidden;
-
-        height: 100%;
-        width: 100%;
-
-        background: linear-gradient(-120deg, $bgColorWavy -30%, $contrastColorDark 100%);
-    }
-
-    /* MAIN WINDOW */
-    .window {
-        position: absolute;
-        overflow: hidden;
-
-        height: 93%;
-        width: 97%;
-
-        top: 51%;
-        left: 50%;
-        margin-right: -50%;
-        transform: translate(-50%, -50%);
-
-        border-radius: 7px;
-        background-color: $bgColor;
-    }
-
-    /* MENU BUTTON */
-    .menu {
-      position: absolute;
-
-      margin-top: 8px;
-      margin-left: 10px;
-      width: 12px;
-      height: 12px;
-
-      border: none;
-      border-radius: 50%;
-
-      background-color: $contrastColorLight;
-      cursor: pointer;
-      overflow: hidden;
-
-      text-align: center;
-      font-size: 10px;
-      font-weight: 750;
-
-      color: $contrastColorDark;
-    }
-
-    /* BACK BUTTON */
-    .btnBack {
-      position: absolute;
-
-      margin-top: 40px;
-      margin-left: 25px;
-
-      height: 30px;
-      width: 30px;
-      opacity: 0;
-      border-radius: 50%;
-      border: none;
-
-      background-color: $bgColorWavy;
-      color: $contrastColorLight;
-      font-size: 15px;
-      font-weight: 900;
-      text-align: center;
-
-      cursor: pointer;
-
-      animation: effect 1s ease-in-out;
-      animation-delay: 1.5s;
-      animation-fill-mode: forwards;
-      transition: all 0.5s ease-in-out;
-
-      &:hover {
-        background-color: $contrastColorLight;
-        color: $contrastColorDark;
-
-        transition: all 0.5s ease-in-out;
-      }
-    }
-
-    /* THEME BUTTON */
-    .theme {
-      float: right;
-      width: 20px;
-      height: 20px;
-
-      margin-right: 15px;
-      margin-top: 5px;
-
-      border: none;
-      border-radius: 50%;
-
-      background-color: $bgColorWavy;
-      cursor: pointer;
-      overflow: hidden;
-
-      text-align: center;
-      font-size: 10px;
-      font-weight: 900;
-
-      color: $contrastColorDark;
-    }
-
-    a {
-      text-decoration: none;
-      &:hover,
-      &:active,
-      &:focus,
-      &:visited,
-      &:link {
-        color: inherit;
-      }
-    }
-
-    /* SEARCH */
-    #left {
-      position: relative;
-
-      width: 25%;
-      height: 100%;
-    }
-
-    #search {
-      overflow: hidden;
-
-      background-color: $bgWindow;
-
-      margin-top: 3%;
-      margin-left: 2%;
-
-      width: 100%;
-      height: 10%;
-
-      border-radius: 10px;
-
-      box-shadow: 10px 10px 35px #bebebe, -10px -10px 35px #ffffff;
-    }
-
-    .searchInput {
-      background-color: $bgColor;
-
-      margin-top: 5%;
-      margin-left: 5%;
-      padding: 4%;
-
-      height: 60%;
-      width: 75%;
-      border: none;
-      border-radius: 5px;
-
-      &:active,
-      &:focus {
-        outline: 0;
-      }
-    }
-
-    /* LIST OF COMPOUNDS */
-    #list {
-      overflow: hidden;
-
-      margin-top: 3%;
-      margin-left: 2%;
-
-      background-color: $bgWindow;
-      height: 85%;
-      width: 100%;
-
-      border-radius: 10px;
-
-      box-shadow: 10px 10px 35px #bebebe, -10px -10px 35px #ffffff;
-    }
-
-    /* COMPOUND BLOCK */
-    .compound {
-      position: relative;
-      overflow: hidden;
-
-      padding: 5%;
-      margin: 5%;
-
-      background: none;
-
-      border-radius: 5px;
-      transition: all 1s ease-in-out;
-      box-shadow: 2px 2px 10px #bebebe, -2px -2px 10px #ffffff;
-      &:hover {
-        background: linear-gradient(120deg, #ffffff 10%, rgba(186, 208, 114, 0.48) 100%);
-
-        transition: all 1s ease-in-out;
-      }
-    }
-
-    @media screen and (max-width: 479px) {
-      .btnBack {
-        margin-top: 10px;
-        margin-left: 10px;
-
-        height: 15px;
-        width: 15px;
-      }
-    }
-
-    @media screen and (max-width: 767px) {
-      .btnBack {
-        margin-top: 40px;
-        margin-left: 0px;
-
-        height: 22px;
-        width: 22px;
-
-        font-size: 10px;
-      }
-    }
-</style>

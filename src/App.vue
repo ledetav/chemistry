@@ -1,27 +1,64 @@
 <template>
   <div>
+    <!--<button @click.prevent="toggleTheme" class="theme">
+      <i
+        class="fa-duotone fa-moon-stars fa-xl"
+        style="color: var(--icon-color-second)"
+      ></i>
+    </button>
+    -->
     <router-view />
   </div>
 </template>
-
 <script>
 export default {
-  
-}
+  data() {
+    return {
+      userTheme: "light-theme",
+    };
+  },
+  methods: {
+    setTheme(theme) {
+      localStorage.setItem("user-theme", theme);
+      this.userTheme = theme;
+      document.documentElement.className = theme;
+    },
+    toggleTheme() {
+      const activeTheme = localStorage.getItem("user-theme");
+      if (activeTheme === "light-theme") {
+        this.setTheme("dark-theme");
+      } else {
+        this.setTheme("light-theme");
+      }
+    },
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-  $bgColor: #e0e5e6;
-  $panelColor: #3d9690;
-  $contrastColorDark: #023026;
-  $contrastColorLight: #6e9a44;
-  $bgColorWavy: #bad072;
-  $bgColorSecond: #d5e2ed;
-  $bgWindow: #fbfcfd;
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap');
+@import "./views/scss/app";
 
-  * {
-    padding: 0;
-    margin: 0;
-    font-family:  Raleway, Arial, sans-serif;
-  }
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-main-color);
+}
+
+.theme {
+  float: right;
+  margin-right: 15px;
+  margin-top: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+@import "vue-select/src/scss/vue-select.scss";
 </style>
