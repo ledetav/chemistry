@@ -21,7 +21,7 @@ export default {
       this.scene = new THREE.Scene();
 
       //Camera
-      this.camera = new THREE.PerspectiveCamera(5, 1.93, 0.5, 1000);
+      this.camera = new THREE.PerspectiveCamera(10, 1.93, 0.5, 1000);
       this.camera.position.z = 70;
       this.camera.position.y = 30;
       this.camera.position.x = 15;
@@ -35,8 +35,8 @@ export default {
       const controls = new OrbitControls(this.camera, this.renderer.domElement);
       controls.update();
       controls.enableDamping = true;
-      controls.minDistance = 10;
-      controls.maxDistance = 40;
+      controls.minDistance = 30;
+      controls.maxDistance = 70;
 
       //light
       const ambient = new THREE.AmbientLight(0xffffff, 0.3);
