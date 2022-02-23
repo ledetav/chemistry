@@ -14,12 +14,10 @@
   .appWindow {
     position: relative;
   
-    height: 90%;
-    width: 90%;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+    height: ceil(90vh);
+    width: ceil(90vw);
+    top: 5vh;
+    left: 5vw;
   
     border-radius: 10px;
     overflow: hidden;
@@ -55,13 +53,10 @@
     overflow: hidden;
     display: flex;
   
-    height: 93%;
-    width: 97%;
-  
-    top: 51%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
+    height: ceil(93%);
+    width: ceil(97%);
+    top: 4vh;
+    left: 1.34vw;
   
     border-radius: 7px;
     background-color: var(--background-window-color);
@@ -139,8 +134,8 @@
     position: relative;
     display: flex;
   
-    margin-top: 2%;
-    width: 25%;
+    margin-top: ceil(2%);
+    width: ceil(25%);
     height: 100%;
   
     z-index: 1;
@@ -157,10 +152,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: 2%;
+    margin-left: ceil(2%);
   
     width: 100%;
-    height: 10%;
+    height: ceil(10%);
   
     border-radius: 10px;
     box-shadow: 6px 6px 22px var(--shadow-color-first),
@@ -171,12 +166,12 @@
     background-color: var(--select);
     color: var(--text-main-color);
   
-    margin-top: 5%;
-    margin-left: 5%;
-    padding: 4%;
+    margin-top: ceil(5%);
+    margin-left: ceil(5%);
+    padding: ceil(4%);
   
-    height: 60%;
-    width: 75%;
+    height: ceil(60%);
+    width: ceil(75%);
     border: none;
     border-radius: 5px;
   
@@ -201,11 +196,11 @@
   #list {
     overflow: hidden;
   
-    margin-top: 3%;
-    margin-left: 2%;
+    margin-top: ceil(3%);
+    margin-left: ceil(2%);
   
     background-color: var(--background-color-second);
-    height: 85%;
+    height: ceil(85%);
     width: 100%;
   
     border-radius: 10px;
@@ -216,12 +211,14 @@
     position: relative;
     overflow: hidden;
   
-    padding: 5%;
-    margin: 5%;
+    padding: ceil(4%);
+    margin: ceil(5%);
   
     background: var(--background-color-compound);
   
     border-radius: 5px;
+    font-size: 15px;
+    font-weight: 700;
     transition: all 1s ease-in-out;
     &:hover {
       background: linear-gradient(
@@ -236,6 +233,7 @@
   .description {
     color: var(--contrast-color-light);
     font-size: 12px;
+    font-weight: 900;
     margin-top: 3px;
   }
   #right {
@@ -243,9 +241,9 @@
     display: flex;
   
     margin-top: 20px;
-    margin-left: 850px;
+    margin-left: 830px;
   
-    width: 285px;
+    width: 300px;
     height: 525px;
   
     animation: effect 0.3s ease-in-out;
@@ -256,12 +254,14 @@
   
   #listInfo {
     background-color: var(--background-color-second);
+
+    width: 300px;
+    padding-top: 10px;
+    padding-bottom: 10px;
   
     border-radius: 10px;
-    width: 100%;
     box-shadow: -6px 6px 22px var(--shadow-color-first),
       6px -6px 22px var(--shadow-color-second);
-      overflow: scroll;
   }
   .show {
     height: 20px;
@@ -273,7 +273,7 @@
   }
   .showInfo {
     margin-top: 35px;
-    margin-left: 815px;
+    margin-left: 795px;
     position: absolute;
     z-index: 1;
     animation: effect 0.3s ease-in-out;
@@ -319,14 +319,15 @@
       color: var(--select-text-color);
       font-weight: 400;
       font-size: 20px;
+      z-index: 1;
     }
   }
   
   .arrow {
     position: absolute;
     filter: opacity(30%);
-    top: 13%;
-    left: 22%;
+    top: ceil(13%);
+    left: ceil(22%);
     transform: rotate(-10deg);
   
     animation: effect 0.2s ease-in-out;
@@ -337,8 +338,8 @@
   
   .pap {
     position: absolute;
-    top: 60%;
-    left: 43%;
+    top: ceil(60%);
+    left: ceil(43%);
     filter: opacity(40%);
   
     animation: effect 0.2s ease-in-out;
@@ -363,30 +364,6 @@
     left: 0;
     opacity: 0;
   }
-  .warning {
-    top: 40%;
-    z-index: 1;
-    position: absolute;
-    margin: auto;
-    min-width: 99%;
-    height: 30%;
-    background-color: var(--background-window-color);
-    text-align: center;
-    padding: 20px;
-    border-radius: 10px;
-  
-    h4 {
-      margin-top: 10px;
-      font-size: 1rem;
-      color: var(--contrast-color-dark);
-    }
-  
-    h5 {
-      color: var(--select-text-color);
-      font-size: 18px;
-    }
-  }
-  
   @keyframes effect {
     0% {
       opacity: 0;
@@ -395,12 +372,6 @@
       opacity: 0.85;
     }
     100% {
-      opacity: 1;
-    }
-  }
-  
-  @media screen and (max-width: 767px) {
-    .warningBlock {
       opacity: 1;
     }
   }

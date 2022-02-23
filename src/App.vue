@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&display=swap');
 @import "./views/scss/app";
 
 * {
@@ -44,6 +44,7 @@ export default {
   margin: 0;
   box-sizing: border-box;
   font-family: 'Montserrat', sans-serif;
+  text-rendering: geometricPrecision;
 }
 
 body {

@@ -17,7 +17,7 @@
                 :reduce="(compound) => compound.id"
                 v-model="selected"
                 :searchable="false"
-                style="width: 90%"
+                style="width: 90%; font-weight: 600; font-size: 14px; "
               >
               </v-select>
             </div>
@@ -57,7 +57,6 @@
             <div>
               <div>
                 <div
-                  class="compList"
                   v-for="(compound, index) in compounds"
                   :key="index"
                 >
@@ -82,74 +81,77 @@
                 ></i>
               </button>
               <div id="right" v-if="visibleInfo == true">
-                <div id="listInfo" v-if="selected != null">
-                  <div
-                    class="compList"
-                    v-for="(compound, index) in compounds"
-                    :key="index"
+                  <div id="listInfo"
+                  v-if="selected != null"
+                  style="overflow: auto;"
                   >
-                    <div v-if="compound.id == selected">
-                      <div class="compound">
-                        <h6 class="description">Название соединения:</h6>
-                        <h5>{{ compound.info.name }}</h5>
-                      </div>
-                      <h3
-                        style="
-                          margin: 15px;
-                          font-size: 14px;
-                          color: var(--contrast-color-dark);
-                        "
-                      >
-                        Физические свойства:
-                      </h3>
-                      <div>
+                    <div
+                      v-for="(compound, index) in compounds"
+                      :key="index"
+                      
+                    >
+                      <div v-if="compound.id == selected">
                         <div class="compound">
-                          <h6 class="description">Агрегатное состояние:</h6>
-                          <h5>{{ compound.info.agregate }}</h5>
+                          <p class="description">Название соединения:</p>
+                          <p>{{ compound.info.name }}</p>
                         </div>
-                        <div class="compound">
-                          <h6 class="description">Цвет:</h6>
-                          <h5>{{ compound.info.color }}</h5>
+                        <p
+                          style="
+                            margin: 15px;
+                            font-size: 14px;
+                            font-weight: 900;
+                            color: var(--contrast-color-dark);
+                          "
+                        >
+                          Физические свойства:
+                        </p>
+                        <div>
+                          <div class="compound">
+                            <p class="description">Агрегатное состояние:</p>
+                            <p>{{ compound.info.agregate }}</p>
+                          </div>
+                          <div class="compound">
+                            <p class="description">Цвет:</p>
+                            <p>{{ compound.info.color }}</p>
+                          </div>
+                          <div class="compound">
+                            <p class="description">Запах:</p>
+                            <p>{{ compound.info.smell }}</p>
+                          </div>
+                          <div class="compound">
+                            <p class="description">Растворимость в воде:</p>
+                            <p>{{ compound.info.solubility }}</p>
+                          </div>
                         </div>
-                        <div class="compound">
-                          <h6 class="description">Запах:</h6>
-                          <h5>{{ compound.info.smell }}</h5>
-                        </div>
-                        <div class="compound">
-                          <h6 class="description">Растворимость в воде:</h6>
-                          <h5>{{ compound.info.solubility }}</h5>
-                        </div>
-                      </div>
-                      <h3
-                        style="
-                          margin: 15px;
-                          font-size: 14px;
-                          color: var(--contrast-color-dark);
-                        "
-                      >
-                        Химические свойства:
-                      </h3>
-                      <div>
-                        <div class="compound">
-                          <h6 class="description">Агрегатное состояние:</h6>
-                          <h5>{{ compound.info.agregate }}</h5>
-                        </div>
-                        <div class="compound">
-                          <h6 class="description">Цвет:</h6>
-                          <h5>{{ compound.info.color }}</h5>
-                        </div>
-                        <div class="compound">
-                          <h6 class="description">Запах:</h6>
-                          <h5>{{ compound.info.smell }}</h5>
-                        </div>
-                        <div class="compound">
-                          <h6 class="description">Растворимость в воде:</h6>
-                          <h5>{{ compound.info.solubility }}</h5>
+                        <p
+                          style="
+                            margin: 15px;
+                            font-size: 14px;
+                            font-weight: 900;
+                            color: var(--contrast-color-dark);
+                          "
+                        >
+                          Химические свойства:
+                        </p>
+                        <div>
+                          <div
+                            v-for="(chemical, index) in chemicals"
+                            :key="index"
+                          >
+                            <div
+                              class="compound"
+                              v-if="chemical.compound_id === selected"
+                            >
+                              <p class="description">
+                                {{ chemical.name }}
+                              </p>
+                              <p v-html="chemical.value"></p>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
               </div>
             </div>
           </div>
@@ -228,6 +230,48 @@ export default {
             smell: "Характерный спиртовой запах",
             solubility: "Хорошо растворим",
           },
+        },
+      ],
+      chemicals: [
+        {
+          compound_id: 1,
+          name: "Горение: ",
+          value: "CH<sub>4</sub> + O<sub>2</sub> → C + 2H<sub>2</sub>O",
+        },
+        {
+          compound_id: 1,
+          name: "Хлорирование: ",
+          value: "CH<sub>4</sub> + Cl<sub>2</sub> → CH<sub>3</sub>Cl + HCl",
+        },
+        {
+          compound_id: 1,
+          name: "Нитрование: ",
+          value: "CH<sub>4</sub> + HNO<sub>3</sub> = CH<sub>3</sub>NO<sub>2</sub> + H<sub>2</sub>O",
+        },
+        {
+          compound_id: 1,
+          name: "Пиролиз до ацетилена: ",
+          value: "2CH<sub>4</sub> → HC <i class='fa-regular fa-bars'></i> CH + 3H<sub>2</sub>",
+        },
+        {
+          compound_id: 2,
+          name: "Горение: ",
+          value: "2CH<sub>3</sub>OH + 3O<sub>2</sub> → 2CO<sub>2</sub> + 4H<sub>2</sub>O",
+        },
+        {
+          compound_id: 2,
+          name: "Дегидратация: ",
+          value: "2CH<sub>3</sub>OH → CH<sub>3</sub>OCH<sub>3</sub> + 2H<sub>2</sub>O",
+        },
+        {
+          compound_id: 2,
+          name: "Дегидрирование: ",
+          value: "CH<sub>3</sub>OH → CH<sub>2</sub> = O + H<sub>2</sub>",
+        },
+        {
+          compound_id: 2,
+          name: "Взаимодействие с хлороводородом: ",
+          value: "CH<sub>3</sub>OH + HCl → CH<sub>3</sub>Cl + 2H<sub>2</sub>O",
         },
       ],
       visibleSelect: true,

@@ -6,7 +6,8 @@
           <img src="@\assets\atom-svgrepo-com.svg">
         </div>
         <div class="logoName">
-          <h2 class="appName">ChemBook 3D</h2><h2 style="color: red; font-size: 16px;">demo</h2>
+          <h2 class="appName">ChemBook 3D</h2>
+          <h2 style="color: red; font-size: 16px;">demo</h2>
           <h4>Карманный справочник</h4>
         </div>
       </div>
