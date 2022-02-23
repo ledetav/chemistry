@@ -237,11 +237,11 @@
     margin-top: 3px;
   }
   #right {
-    position: absolute;
+    position: sticky;
     display: flex;
   
-    margin-top: 20px;
-    margin-left: 830px;
+    margin-top: 3vh;
+    margin-left: 63vw;
   
     width: 300px;
     height: 525px;
@@ -273,7 +273,7 @@
   }
   .showInfo {
     margin-top: 35px;
-    margin-left: 795px;
+    margin-left: 60vw;
     position: absolute;
     z-index: 1;
     animation: effect 0.3s ease-in-out;
@@ -296,7 +296,7 @@
   
   .compoundWindow {
     display: flex;
-    position: fixed;
+    position: absolute;
   }
   
   .notification {
@@ -349,11 +349,11 @@
   }
   
   .isShowSelect {
-    margin-left: 15px;
+    margin-left: 1vw;
   }
   
   .isShowInfo {
-    margin-left: 1115px;
+    margin-left: 85vw;
   }
   .warningBlock {
     background: rgba(21, 21, 21, 0.748);

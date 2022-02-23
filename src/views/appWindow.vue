@@ -92,8 +92,8 @@
                     >
                       <div v-if="compound.id == selected">
                         <div class="compound">
-                          <p class="description">Название соединения:</p>
-                          <p>{{ compound.info.name }}</p>
+                          <p class="description">Формула соединения:</p>
+                          <p v-html="compound.info.formula"></p>
                         </div>
                         <p
                           style="
@@ -176,7 +176,7 @@ export default {
           title: "Метан",
           gltfFile: "models/untitled.gltf",
           info: {
-            name: "Метан",
+            formula: "CH<sub>4</sub>",
             agregate: "Газ",
             color: "Бесцветное вещество",
             smell: "Без запаха",
@@ -188,7 +188,7 @@ export default {
           title: "Метанол",
           gltfFile: "models/untitled.gltf",
           info: {
-            name: "Метанол",
+            formula: "CH<sub>3</sub>OH",
             agregate: "Жидкость",
             color: "Бесцетное вещество",
             smell: "Похож на запах этилового спирта, но более слабый",
@@ -200,7 +200,7 @@ export default {
           title: "Уксусная кислота",
           gltfFile: "models/untitled.gltf",
           info: {
-            name: "Уксусная кислота",
+            formula: "СН<sub>3</sub>СООН",
             agregate: "Жидкость",
             color: "Бесцветное вещество",
             smell: "Резкий",
@@ -212,7 +212,7 @@ export default {
           title: "Диметиловый эфир",
           gltfFile: "models/untitled.gltf",
           info: {
-            name: "Диметиловый эфир",
+            formula: "C<sub>2</sub>H<sub>6</sub>O",
             agregate: "Газ",
             color: "Бесцветное вещество",
             smell: "Эфирный запах, напоминающий хлороформ",
@@ -224,7 +224,7 @@ export default {
           title: "Этанол",
           gltfFile: "models/untitled.gltf",
           info: {
-            name: "Этанол",
+            formula: "C<sub>2</sub>H<sub>5</sub>OH",
             agregate: "Жидкость",
             color: "Бесцветное вещество",
             smell: "Характерный спиртовой запах",
@@ -236,7 +236,7 @@ export default {
         {
           compound_id: 1,
           name: "Горение: ",
-          value: "CH<sub>4</sub> + O<sub>2</sub> → C + 2H<sub>2</sub>O",
+          value: "CH<sub>4</sub> + 2O<sub>2</sub> → CO<sub>2</sub> + 2H<sub>2</sub>O",
         },
         {
           compound_id: 1,
@@ -246,7 +246,7 @@ export default {
         {
           compound_id: 1,
           name: "Нитрование: ",
-          value: "CH<sub>4</sub> + HNO<sub>3</sub> = CH<sub>3</sub>NO<sub>2</sub> + H<sub>2</sub>O",
+          value: "CH<sub>4</sub> + HNO<sub>3</sub> → CH<sub>3</sub>NO<sub>2</sub> + H<sub>2</sub>O",
         },
         {
           compound_id: 1,
@@ -261,7 +261,7 @@ export default {
         {
           compound_id: 2,
           name: "Дегидратация: ",
-          value: "2CH<sub>3</sub>OH → CH<sub>3</sub>OCH<sub>3</sub> + 2H<sub>2</sub>O",
+          value: "2CH<sub>3</sub>OH → CH<sub>3</sub>OCH<sub>3</sub> + H<sub>2</sub>O",
         },
         {
           compound_id: 2,
@@ -271,7 +271,52 @@ export default {
         {
           compound_id: 2,
           name: "Взаимодействие с хлороводородом: ",
-          value: "CH<sub>3</sub>OH + HCl → CH<sub>3</sub>Cl + 2H<sub>2</sub>O",
+          value: "CH<sub>3</sub>OH + HCl → CH<sub>3</sub>Cl + H<sub>2</sub>O",
+        },
+        {
+          compound_id: 3,
+          name: "Горение: ",
+          value: "СН<sub>3</sub>СООН + 2О<sub>2</sub> → 2H<sub>2</sub>О + 2СО<sub>2</sub>",
+        },
+        {
+          compound_id: 3,
+          name: "Этерификация: ",
+          value: "СН<sub>3</sub>СООН + HOC<sub>2</sub>H<sub>5</sub> → СН<sub>3</sub>СООC<sub>2</sub>H<sub>5</sub> + 2H<sub>2</sub>О",
+        },
+        {
+          compound_id: 3,
+          name: "Взаимодействие с металлами: ",
+          value: "2СН<sub>3</sub>СООН + Zn → (СН<sub>3</sub>СОО)<sub>2</sub>Zn + H<sub>2</sub>",
+        },
+        {
+          compound_id: 3,
+          name: "Взаимодействие с основаниями:",
+          value: "СН<sub>3</sub>СООН + NaOH → СН<sub>3</sub>СООNa + H<sub>2</sub>О",
+        },
+        {
+          compound_id: 4,
+          name: "Горение: ",
+          value: "C<sub>2</sub>H<sub>6</sub>O + 3O<sub>2</sub> → 2CO<sub>2</sub> + 3H<sub>2</sub>O",
+        },
+        {
+          compound_id: 4,
+          name: "Гидролиз: ",
+          value: "C<sub>2</sub>H<sub>6</sub>O + H<sub>2</sub>O + 2CO → 2СН<sub>3</sub>СООН",
+        },
+        {
+          compound_id: 5,
+          name: "Горение: ",
+          value: "C<sub>2</sub>H<sub>5</sub>OH + 3O<sub>2</sub> → 2CO<sub>2</sub> + 3H<sub>2</sub>O",
+        },
+        {
+          compound_id: 5,
+          name: "Дегидратация: ",
+          value: "C<sub>2</sub>H<sub>5</sub>OH → CH<sub>2</sub>=CH<sub>2</sub> + H<sub>2</sub>O",
+        },
+        {
+          compound_id: 5,
+          name: "Дегидрирование ",
+          value: "C<sub>2</sub>H<sub>5</sub>OH → C<sub>2</sub>H<sub>4</sub>=O + H<sub>2</sub>",
         },
       ],
       visibleSelect: true,
