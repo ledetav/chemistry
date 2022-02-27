@@ -174,7 +174,7 @@ export default {
         {
           id: 1,
           title: "Метан",
-          gltfFile: "models/untitled.gltf",
+          gltfFile: "models/metan.gltf",
           info: {
             formula: "CH<sub>4</sub>",
             agregate: "Газ",
@@ -186,7 +186,7 @@ export default {
         {
           id: 2,
           title: "Метанол",
-          gltfFile: "models/untitled.gltf",
+          gltfFile: "models/metanol.gltf",
           info: {
             formula: "CH<sub>3</sub>OH",
             agregate: "Жидкость",
@@ -198,7 +198,7 @@ export default {
         {
           id: 3,
           title: "Уксусная кислота",
-          gltfFile: "models/untitled.gltf",
+          gltfFile: "models/uksos.gltf",
           info: {
             formula: "СН<sub>3</sub>СООН",
             agregate: "Жидкость",
@@ -210,7 +210,7 @@ export default {
         {
           id: 4,
           title: "Диметиловый эфир",
-          gltfFile: "models/untitled.gltf",
+          gltfFile: "models/efir.gltf",
           info: {
             formula: "C<sub>2</sub>H<sub>6</sub>O",
             agregate: "Газ",
@@ -222,7 +222,7 @@ export default {
         {
           id: 5,
           title: "Этанол",
-          gltfFile: "models/untitled.gltf",
+          gltfFile: "models/etanol.gltf",
           info: {
             formula: "C<sub>2</sub>H<sub>5</sub>OH",
             agregate: "Жидкость",
@@ -281,7 +281,7 @@ export default {
         {
           compound_id: 3,
           name: "Этерификация: ",
-          value: "СН<sub>3</sub>СООН + HOC<sub>2</sub>H<sub>5</sub> → СН<sub>3</sub>СООC<sub>2</sub>H<sub>5</sub> + 2H<sub>2</sub>О",
+          value: "СН<sub>3</sub>СООН + HOC<sub>2</sub>H<sub>5</sub> → СН<sub>3</sub>СООC<sub>2</sub>H<sub>5</sub> + H<sub>2</sub>О",
         },
         {
           compound_id: 3,
@@ -301,7 +301,7 @@ export default {
         {
           compound_id: 4,
           name: "Гидролиз: ",
-          value: "C<sub>2</sub>H<sub>6</sub>O + H<sub>2</sub>O + 2CO → 2СН<sub>3</sub>СООН",
+          value: "C<sub>2</sub>H<sub>6</sub>O + H<sub>2</sub>O + 2CH<sub>3</sub>OH",
         },
         {
           compound_id: 5,

@@ -39,27 +39,18 @@ export default {
       controls.maxDistance = 70;
 
       //light
-      const ambient = new THREE.AmbientLight(0xffffff, 0.3);
+     const ambient = new THREE.AmbientLight(0xffffff, 1.3);
       this.scene.add(ambient);
 
-      let light = new THREE.PointLight(0xc4c4c4, 0.5);
-      light.position.set(0, 300, 500);
+      const light = new THREE.HemisphereLight(0xffffff, 0x000000, 0.5);
       this.scene.add(light);
+      
+      let light1 = new THREE.PointLight(0xbfbfbf, 0.3);
+      light1.position.set(0, 100, 0);
+      this.scene.add(light1);
 
-      let light2 = new THREE.PointLight(0xc4c4c4, 0.5);
-      light2.position.set(500, 300, 500);
-      this.scene.add(light2);
-
-      let light3 = new THREE.PointLight(0xc4c4c4, 0.5);
-      light3.position.set(0, 300, -500);
-      this.scene.add(light3);
-
-      let light4 = new THREE.PointLight(0xc4c4c4, 0.5);
-      light4.position.set(-500, 300, 500);
-      this.scene.add(light4);
-
+      //GLTFLoader
       var loader = new GLTFLoader();
-
       loader.load(
         this.gltfFile,
         (gltf) => {
